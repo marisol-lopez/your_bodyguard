@@ -1,4 +1,4 @@
 class Contact < ApplicationRecord
-  has_many :users
-  has_many :runs, through: :users
+  belongs_to :user
+  belongs_to :run
 end

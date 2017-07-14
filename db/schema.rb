@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170713231649) do
+ActiveRecord::Schema.define(version: 20170714201359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,12 +27,19 @@ ActiveRecord::Schema.define(version: 20170713231649) do
     t.time     "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "status"
   end
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "run_id"
+    t.integer  "contact_id"
+    t.index ["contact_id"], name: "index_users_on_contact_id", using: :btree
+    t.index ["run_id"], name: "index_users_on_run_id", using: :btree
   end
 
+  add_foreign_key "users", "contacts"
+  add_foreign_key "users", "runs"
 end
